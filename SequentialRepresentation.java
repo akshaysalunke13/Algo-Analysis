@@ -16,6 +16,7 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
      * Constructs empty graph.
      */
     public SequentialRepresentation() {
+    	//test
         // Implement me!
     } // end of SequentialRepresentation()
 

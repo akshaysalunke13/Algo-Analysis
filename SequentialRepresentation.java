@@ -12,7 +12,8 @@ import java.io.PrintWriter;
  */
 public class SequentialRepresentation<T> implements BSPTree<T> {
 
-    private T BSPTree[] = null;
+    private T myTree[] = null;
+    private int index = 0;
     /**
      * Constructs empty graph.
      */
@@ -24,15 +25,23 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
     @Override
     public void setRootNode(T nodeLabel) {
 
-        BSPTree[0] = nodeLabel;
+        myTree[0] = nodeLabel;
         // Implement me!
     } // end of setRootNode()
 
     @Override
     public void splitNode(T srcLabel, T leftChild, T rightChild) {
         if (findNode(srcLabel)) {
-
+            // Parent node exists in the tree. 
+            /**
+             * Left child = 2P + 1
+             * Right Child = 2P + 2
+             */
+            myTree[(2 * index) + 1] = leftChild;
+            myTree[(2 * index) + 2] = rightChild;
+            
         } else {
+
             //srcLabel node not found.
             return;
         }
@@ -41,21 +50,72 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
 
     @Override
     public boolean findNode(T nodeLabel) {
-        
+        for (int i = 0; i < myTree.length; i++) {
+            if(myTree[i] == nodeLabel) {
+                index = i;
+                return true;
+            }
+        }
+
         // Implement me!
         return false;
     } // end of findNode
 
     @Override
     public String findParent(T nodeLabel) {
+        String toReturn="";
         // Implement me!
-        return null;
+        if (findNode(nodeLabel)) {
+
+            toReturn += nodeLabel + " ";
+            // Node found in tree
+            if (index == 0) {
+                // This is the root node
+                 return toReturn;
+
+            } else if (index % 2 == 0) {
+                //This is the right child
+                int t = (index - 2)/2;
+                // t is the index of parent
+
+                toReturn += myTree[t];
+            } else if (index % 2 == 1) {
+                //This is the left child
+                int t = (index - 1)/2;
+                // t is index of parent
+
+                toReturn += myTree[t];
+            }
+
+            return toReturn;
+        } 
+            // Node not found
+            return null;
+        
+        
     } // end of findParent
 
     @Override
     public String findChildren(T nodeLabel) {
+        String toReturn = "";
         // Implement me!
-        return null;
+         if (findNode(nodeLabel)) {
+            //Node found in the tree.
+            toReturn += nodeLabel + " ";
+
+            int lChild = (index * 2) + 1;
+            int rChild = (index * 2) + 2;
+
+            if (myTree[lChild] != null) {
+                toReturn += myTree[lChild] + " ";
+            }  
+            if (myTree[rChild] != null) {
+                toReturn += myTree[rChild];
+            }
+
+            return toReturn;
+        }
+   return null;
     } // end of findParent
 
     @Override
@@ -65,7 +125,7 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
 
     @Override
     public void printInInorder(PrintWriter writer) {
-        // Implement me!
+        // Implement me! Ascending sorted
     } // end of printInInorder
 
     @Override

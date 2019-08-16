@@ -12,6 +12,7 @@ import java.io.PrintWriter;
  */
 public class SequentialRepresentation<T> implements BSPTree<T> {
 
+    private T BSPTree[] = null;
     /**
      * Constructs empty graph.
      */
@@ -22,16 +23,25 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
 
     @Override
     public void setRootNode(T nodeLabel) {
+
+        BSPTree[0] = nodeLabel;
         // Implement me!
     } // end of setRootNode()
 
     @Override
     public void splitNode(T srcLabel, T leftChild, T rightChild) {
+        if (findNode(srcLabel)) {
+
+        } else {
+            //srcLabel node not found.
+            return;
+        }
         // Implement me!
     } // end of splitNode
 
     @Override
     public boolean findNode(T nodeLabel) {
+        
         // Implement me!
         return false;
     } // end of findNode

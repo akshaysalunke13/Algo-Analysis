@@ -1,5 +1,5 @@
 import java.io.PrintWriter;
-
+import java.util.Arrays;
 
 /**
  * Sequential Tree Representation implementation for the {@link BSPTree} interface.
@@ -12,7 +12,10 @@ import java.io.PrintWriter;
  */
 public class SequentialRepresentation<T> implements BSPTree<T> {
 
-    private T myTree[] = null;
+    // Initial capacity of 100
+    private int treeSize = 5;
+    private T[] myTree = (T[]) new Object[treeSize];
+    
     private int index = 0;
     /**
      * Constructs empty graph.
@@ -32,7 +35,13 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
     @Override
     public void splitNode(T srcLabel, T leftChild, T rightChild) {
         if (findNode(srcLabel)) {
-            // Parent node exists in the tree. 
+            // Parent node exists in the tree.
+            
+            //Check array size for available space.
+            if (myTree.length <= ((2 * index) + 2)) {
+                myTree = Arrays.copyOf(myTree, myTree.length*2);
+            }
+            // Check size of array 
             /**
              * Left child = 2P + 1
              * Right Child = 2P + 2
@@ -51,10 +60,15 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
     @Override
     public boolean findNode(T nodeLabel) {
         for (int i = 0; i < myTree.length; i++) {
-            if(myTree[i] == nodeLabel) {
-                index = i;
-                return true;
+
+            if (myTree[i] != null ) {
+                if(myTree[i].equals(nodeLabel)) {
+                    //Store the index of the element searched
+                    index = i;
+                    return true;
+                }
             }
+
         }
 
         // Implement me!

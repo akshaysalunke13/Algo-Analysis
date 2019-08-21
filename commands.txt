@@ -1,0 +1,5 @@
+javac -cp .:jopt-simple-5.0.2.jar:sample.jar *.java
+
+java -cp .:jopt-simple-5.0.2.jar:sample.jar TreeTester seqtree
+
+python assign1TestScript.py -v / seqtree test1.in

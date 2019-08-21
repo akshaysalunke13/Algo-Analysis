@@ -134,17 +134,66 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
 
     @Override
     public void printInPreorder(PrintWriter writer) {
+        // Call preorder traversal at root node
+        preorderTraverse(0, writer);
+        writer.println();
         // Implement me!
     } // end of printInPreorder
+
+    private void preorderTraverse(int index, PrintWriter writer) {
+
+        if (index >= myTree.length) {
+            return;
+        }
+        
+        if(myTree[index] == null) {
+            return;
+        } else {
+            writer.print(myTree[index] + " ");
+            preorderTraverse((index*2) + 1, writer);
+            preorderTraverse((index*2) + 2, writer);
+        }
+    }
 
     @Override
     public void printInInorder(PrintWriter writer) {
         // Implement me! Ascending sorted
+        inorderTraverse(0, writer);
+        writer.println();
     } // end of printInInorder
 
+    private void inorderTraverse(int index, PrintWriter writer) {
+        if (index >= myTree.length) {
+            return;
+        }
+        
+        if(myTree[index] == null) {
+            return;
+        } else {
+            inorderTraverse((index*2) + 1, writer);
+            writer.print(myTree[index] + " ");
+            inorderTraverse((index*2) + 2, writer);
+        }
+    }
     @Override
     public void printInPostorder(PrintWriter writer) {
         // Implement me!
+        postorderTraverse(0, writer);
+        writer.println();
     } // end of printInPostorder
 
+    private void postorderTraverse(int index, PrintWriter writer) {
+        if (index >= myTree.length) {
+            return;
+        }
+        
+        if(myTree[index] == null) {
+            return;
+        } else {
+            postorderTraverse((index*2) + 1, writer);
+            postorderTraverse((index*2) + 2, writer);
+            writer.print(myTree[index] + " ");
+        }
+    }
+        
 } // end of class SequentialRepresentation

@@ -2,10 +2,11 @@ import java.io.PrintWriter;
 import java.util.Arrays;
 
 /**
- * Sequential Tree Representation implementation for the {@link BSPTree} interface.
+ * Sequential Tree Representation implementation for the {@link BSPTree}
+ * interface.
  * <p>
- * Your task is to complete the implementation of this class.
- * You may add methods, but ensure your modified class compiles and runs.
+ * Your task is to complete the implementation of this class. You may add
+ * methods, but ensure your modified class compiles and runs.
  *
  * @author Jeffrey Chan, 2016.
  * @author Yongli Ren, 2019.
@@ -15,13 +16,14 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
     // Initial capacity of 100
     private int treeSize = 5;
     private T[] myTree = (T[]) new Object[treeSize];
-    
+
     private int index = 0;
+
     /**
      * Constructs empty graph.
      */
     public SequentialRepresentation() {
-    	//test
+        // test
         // Implement me!
     } // end of SequentialRepresentation()
 
@@ -36,22 +38,21 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
     public void splitNode(T srcLabel, T leftChild, T rightChild) {
         if (findNode(srcLabel)) {
             // Parent node exists in the tree.
-            
-            //Check array size for available space.
+
+            // Check array size for available space.
             if (myTree.length <= ((2 * index) + 2)) {
-                myTree = Arrays.copyOf(myTree, myTree.length*2);
+                myTree = Arrays.copyOf(myTree, myTree.length * 2);
             }
-            // Check size of array 
+            // Check size of array
             /**
-             * Left child = 2P + 1
-             * Right Child = 2P + 2
+             * Left child = 2P + 1 Right Child = 2P + 2
              */
             myTree[(2 * index) + 1] = leftChild;
             myTree[(2 * index) + 2] = rightChild;
-            
+
         } else {
 
-            //srcLabel node not found.
+            // srcLabel node not found.
             return;
         }
         // Implement me!
@@ -61,9 +62,9 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
     public boolean findNode(T nodeLabel) {
         for (int i = 0; i < myTree.length; i++) {
 
-            if (myTree[i] != null ) {
-                if(myTree[i].equals(nodeLabel)) {
-                    //Store the index of the element searched
+            if (myTree[i] != null) {
+                if (myTree[i].equals(nodeLabel)) {
+                    // Store the index of the element searched
                     index = i;
                     return true;
                 }
@@ -77,7 +78,7 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
 
     @Override
     public String findParent(T nodeLabel) {
-        String toReturn="";
+        String toReturn = "";
         // Implement me!
         if (findNode(nodeLabel)) {
 
@@ -85,36 +86,35 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
             // Node found in tree
             if (index == 0) {
                 // This is the root node
-                 return toReturn;
+                return toReturn;
 
             } else if (index % 2 == 0) {
-                //This is the right child
-                int t = (index - 2)/2;
+                // This is the right child
+                int t = (index - 2) / 2;
                 // t is the index of parent
 
                 toReturn += myTree[t];
             } else if (index % 2 == 1) {
-                //This is the left child
-                int t = (index - 1)/2;
+                // This is the left child
+                int t = (index - 1) / 2;
                 // t is index of parent
 
                 toReturn += myTree[t];
             }
 
             return toReturn;
-        } 
-            // Node not found
-            return null;
-        
-        
+        }
+        // Node not found
+        return null;
+
     } // end of findParent
 
     @Override
     public String findChildren(T nodeLabel) {
         String toReturn = "";
         // Implement me!
-         if (findNode(nodeLabel)) {
-            //Node found in the tree.
+        if (findNode(nodeLabel)) {
+            // Node found in the tree.
             toReturn += nodeLabel + " ";
 
             int lChild = (index * 2) + 1;
@@ -122,14 +122,14 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
 
             if (myTree[lChild] != null) {
                 toReturn += myTree[lChild] + " ";
-            }  
+            }
             if (myTree[rChild] != null) {
                 toReturn += myTree[rChild];
             }
 
             return toReturn;
         }
-   return null;
+        return null;
     } // end of findParent
 
     @Override
@@ -145,13 +145,13 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
         if (index >= myTree.length) {
             return;
         }
-        
-        if(myTree[index] == null) {
+
+        if (myTree[index] == null) {
             return;
         } else {
             writer.print(myTree[index] + " ");
-            preorderTraverse((index*2) + 1, writer);
-            preorderTraverse((index*2) + 2, writer);
+            preorderTraverse((index * 2) + 1, writer);
+            preorderTraverse((index * 2) + 2, writer);
         }
     }
 
@@ -166,15 +166,16 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
         if (index >= myTree.length) {
             return;
         }
-        
-        if(myTree[index] == null) {
+
+        if (myTree[index] == null) {
             return;
         } else {
-            inorderTraverse((index*2) + 1, writer);
+            inorderTraverse((index * 2) + 1, writer);
             writer.print(myTree[index] + " ");
-            inorderTraverse((index*2) + 2, writer);
+            inorderTraverse((index * 2) + 2, writer);
         }
     }
+
     @Override
     public void printInPostorder(PrintWriter writer) {
         // Implement me!
@@ -186,14 +187,14 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
         if (index >= myTree.length) {
             return;
         }
-        
-        if(myTree[index] == null) {
+
+        if (myTree[index] == null) {
             return;
         } else {
-            postorderTraverse((index*2) + 1, writer);
-            postorderTraverse((index*2) + 2, writer);
+            postorderTraverse((index * 2) + 1, writer);
+            postorderTraverse((index * 2) + 2, writer);
             writer.print(myTree[index] + " ");
         }
     }
-        
+
 } // end of class SequentialRepresentation

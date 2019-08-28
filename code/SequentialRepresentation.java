@@ -30,7 +30,10 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
     @Override
     public void setRootNode(T nodeLabel) {
 
-        myTree[0] = nodeLabel;
+        if (myTree[0] == null)
+            myTree[0] = nodeLabel;
+        else
+            System.err.println("Tree already has root.");
         // Implement me!
     } // end of setRootNode()
 

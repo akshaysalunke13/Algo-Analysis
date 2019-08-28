@@ -12,6 +12,7 @@ import java.io.PrintWriter;
  */
 public class LinkedRepresentation<T> implements BSPTree<T> {
 
+    private Node rootNode;
     /**
      * Constructs empty tree.
      */
@@ -21,19 +22,48 @@ public class LinkedRepresentation<T> implements BSPTree<T> {
 
     @Override
     public void setRootNode(T nodeLabel) {
+        this.rootNode = new Node (nodeLabel);
         // Implement me!
     } // end of setRootNode()
 
     @Override
     public void splitNode(T srcLabel, T leftChild, T rightChild) {
+        if (findNode(srclabel)) {
+                                
+        }
         // Implement me!
     } // end of splitNode
 
     @Override
     public boolean findNode(T nodeLabel) {
+        if (search(rootNode, nodeLabel))
+            return true;
+
         // Implement me!
         return false;
     } // end of findNode
+
+    private boolean search (Node n, T nodeLabel) {
+
+            
+        if (n.data != null) {
+            if (n.data.equals(nodeLabel)) {
+                return true;
+        }
+            else {
+                if (n.leftNode != null)
+                search(n.leftNode, nodeLabel);
+
+                if (n.rightNode != null)
+                search(n.rightNode, nodeLabel);
+
+                return false;
+            }
+        } else {
+            return false;
+        }
+
+    }
 
     @Override
     public String findParent(T nodeLabel) {
@@ -63,3 +93,33 @@ public class LinkedRepresentation<T> implements BSPTree<T> {
     } // end of printInPostorder
 
 } // end of class LinkedRepresentation
+
+class Node<T> {
+    protected T data;
+    protected Node leftNode;
+    protected Node rightNode;
+
+    Node(T data) {
+        this.data = data;
+        leftNode = null;
+        rightNode = null;
+    }
+
+    /**
+     * @return the leftNode
+     */
+    public Node getLeftNode() {
+        return leftNode;
+    }
+
+    /**
+     * @return the rightNode
+     */
+    public Node getRightNode() {
+        return rightNode;
+    }
+
+    public void setData(T data) {
+        this.data = data;
+    }
+}

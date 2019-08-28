@@ -87,10 +87,10 @@ public class LinkedRepresentation<T> implements BSPTree<T> {
         }
 
         if (lSearch != null)
-            return lSearch + n.data.toString();
+            return lSearch + n.data.toString() + " ";
 
         if (rSearch != null)
-            return rSearch + n.data.toString();
+            return rSearch + n.data.toString() + " ";
 
         return null;
 
@@ -105,7 +105,7 @@ public class LinkedRepresentation<T> implements BSPTree<T> {
 
         String tok[] = s.split(" ");
        if (tok.length > 1)
-            return tok[0] + " " + tok[1].charAt(0);
+            return tok[0] + " " + tok[1];
         else
             return s;
 

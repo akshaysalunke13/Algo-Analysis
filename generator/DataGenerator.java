@@ -1,4 +1,3 @@
-import java.awt.List;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -26,7 +25,6 @@ class DataGenerator {
         } catch (Exception e) {
             System.out.println("Only integers.");
             return;
-            //TODO: handle exception
         }
         
         

@@ -39,6 +39,8 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
 
     @Override
     public void splitNode(T srcLabel, T leftChild, T rightChild) {
+
+        long startTime = System.nanoTime();
         if (findNode(srcLabel)) {
             // Parent node exists in the tree.
 
@@ -53,6 +55,7 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
             myTree[(2 * index) + 1] = leftChild;
             myTree[(2 * index) + 2] = rightChild;
 
+            System.out.println("Splitting took: " + (System.nanoTime() - startTime) + " nanosecs");
         } else {
 
             // srcLabel node not found.
@@ -63,12 +66,17 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
 
     @Override
     public boolean findNode(T nodeLabel) {
+
+        long startTime = System.nanoTime();
+
         for (int i = 0; i < myTree.length; i++) {
 
             if (myTree[i] != null) {
                 if (myTree[i].equals(nodeLabel)) {
                     // Store the index of the element searched
                     index = i;
+
+                    System.out.println("Finding took: " + (System.nanoTime() - startTime) + " nanosecs");
                     return true;
                 }
             }
@@ -83,6 +91,7 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
     public String findParent(T nodeLabel) {
         String toReturn = "";
         // Implement me!
+        long startTime = System.nanoTime();
         if (findNode(nodeLabel)) {
 
             toReturn += nodeLabel + " ";
@@ -105,6 +114,7 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
                 toReturn += myTree[t];
             }
 
+            System.out.println("Finding parent took: " + (System.nanoTime() - startTime) + " nanosecs");
             return toReturn;
         }
         // Node not found
@@ -116,6 +126,7 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
     public String findChildren(T nodeLabel) {
         String toReturn = "";
         // Implement me!
+        long startTime = System.nanoTime();
         if (findNode(nodeLabel)) {
             // Node found in the tree.
             toReturn += nodeLabel + " ";
@@ -130,6 +141,7 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
                 toReturn += myTree[rChild];
             }
 
+            System.out.println("Finding children took: " + (System.nanoTime() - startTime) + " nanosecs");
             return toReturn;
         }
         return null;
@@ -138,7 +150,10 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
     @Override
     public void printInPreorder(PrintWriter writer) {
         // Call preorder traversal at root node
+        long startTime = System.nanoTime();
         preorderTraverse(0, writer);
+        System.out.println("Printing preorder took: " + (System.nanoTime() - startTime) + " nanosecs");
+
         writer.println();
         // Implement me!
     } // end of printInPreorder
@@ -161,7 +176,9 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
     @Override
     public void printInInorder(PrintWriter writer) {
         // Implement me! Ascending sorted
+        long startTime = System.nanoTime();
         inorderTraverse(0, writer);
+        System.out.println("Printing inorder took: " + (System.nanoTime() - startTime) + " nanosecs");
         writer.println();
     } // end of printInInorder
 
@@ -182,7 +199,9 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
     @Override
     public void printInPostorder(PrintWriter writer) {
         // Implement me!
+        long startTime = System.nanoTime();
         postorderTraverse(0, writer);
+        System.out.println("Printing postorder took: " + (System.nanoTime() - startTime) + " nanosecs");
         writer.println();
     } // end of printInPostorder
 

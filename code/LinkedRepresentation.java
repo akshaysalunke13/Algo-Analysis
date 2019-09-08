@@ -32,10 +32,13 @@ public class LinkedRepresentation<T> implements BSPTree<T> {
 
     @Override
     public void splitNode(T srcLabel, T leftChild, T rightChild) {
+        long startTime = System.nanoTime();
         if (findNode(srcLabel)) {
             if ((tempNode.leftNode == null) && (tempNode.rightNode == null)) {
                 tempNode.leftNode = new Node(leftChild);
                 tempNode.rightNode = new Node(rightChild);
+
+                System.out.println("Splitting took: " + (System.nanoTime() - startTime) + " nanosecs");
             } else {
                 System.err.println("Node " + tempNode.data.toString() + " already has children.");
             }
@@ -47,7 +50,9 @@ public class LinkedRepresentation<T> implements BSPTree<T> {
 
     @Override
     public boolean findNode(T nodeLabel) {
+        long startTime = System.nanoTime();
         if (search(rootNode, nodeLabel)) {
+            System.out.println("Finding took: " + (System.nanoTime() - startTime) + " nanosecs");
             return true;
         }
         // Implement me!
@@ -97,7 +102,9 @@ public class LinkedRepresentation<T> implements BSPTree<T> {
     }
     @Override
     public String findParent(T nodeLabel) {
+        long startTime = System.nanoTime();
        String s = searchParent(rootNode, nodeLabel);
+       System.out.println("Searching parent took: " + (System.nanoTime() - startTime) + " nanosecs");
 
        if (s == null) {
         return s;
@@ -114,7 +121,11 @@ public class LinkedRepresentation<T> implements BSPTree<T> {
     @Override
     public String findChildren(T nodeLabel) {
         // Implement me!
-        return findChild(rootNode, nodeLabel);
+        long startTime = System.nanoTime();
+        String toReturn = findChild(rootNode, nodeLabel);
+        System.out.println("Finding Children took: " + (System.nanoTime() - startTime) + " nanosecs");
+
+        return toReturn;
         
     } // end of findParent
 
@@ -135,14 +146,16 @@ public class LinkedRepresentation<T> implements BSPTree<T> {
             return;
         
         w.write(n.data.toString() + " ");
-        System.out.print(n.data.toString() + " ");
+        //System.out.print(n.data.toString() + " ");
         preorderTraverse(n.leftNode, w);
         preorderTraverse(n.rightNode, w);
     }
 
     @Override
     public void printInPreorder(PrintWriter writer) {
+        long startTime = System.nanoTime();
         preorderTraverse(rootNode, writer);
+        System.out.println("\nPrinting preorder took: " + (System.nanoTime() - startTime) + " nanosecs");
         // Implement me!
     } // end of printInPreorder
 
@@ -152,14 +165,17 @@ public class LinkedRepresentation<T> implements BSPTree<T> {
         
         inorderTraverse(n.leftNode, w);
         w.write(n.data.toString() + " ");
-        System.out.print(n.data.toString() + " ");
+        //System.out.print(n.data.toString() + " ");
         
         inorderTraverse(n.rightNode, w);
     }
 
     @Override
     public void printInInorder(PrintWriter writer) {
+        long startTime = System.nanoTime();
         inorderTraverse(rootNode, writer);
+        System.out.println("\nPrinting inorder took: " + (System.nanoTime() - startTime) + " nanosecs");
+        
         // Implement me!
     } // end of printInInorder
 
@@ -170,12 +186,14 @@ public class LinkedRepresentation<T> implements BSPTree<T> {
         postorderTraverse(n.leftNode, w);
         postorderTraverse(n.rightNode, w);
         w.write(n.data.toString() + " ");
-        System.out.print(n.data.toString() + " ");
+        //System.out.print(n.data.toString() + " ");
     }
     
     @Override
     public void printInPostorder(PrintWriter writer) {
+        long startTime = System.nanoTime();
         postorderTraverse(rootNode, writer);
+        System.out.println("\nPrinting postorder took: " + (System.nanoTime() - startTime) + " nanosecs");
         // Implement me!
     } // end of printInPostorder
 

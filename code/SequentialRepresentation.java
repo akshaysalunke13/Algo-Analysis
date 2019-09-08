@@ -152,9 +152,10 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
         // Call preorder traversal at root node
         long startTime = System.nanoTime();
         preorderTraverse(0, writer);
-        System.out.println("Printing preorder took: " + (System.nanoTime() - startTime) + " nanosecs");
+        System.out.println("\nPrinting preorder took: " + (System.nanoTime() - startTime) + " nanosecs");
+        
 
-        writer.println();
+        //writer.println();
         // Implement me!
     } // end of printInPreorder
 
@@ -167,7 +168,7 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
         if (myTree[index] == null) {
             return;
         } else {
-            writer.print(myTree[index] + " ");
+            writer.write(myTree[index] + " ");
             preorderTraverse((index * 2) + 1, writer);
             preorderTraverse((index * 2) + 2, writer);
         }
@@ -178,8 +179,8 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
         // Implement me! Ascending sorted
         long startTime = System.nanoTime();
         inorderTraverse(0, writer);
-        System.out.println("Printing inorder took: " + (System.nanoTime() - startTime) + " nanosecs");
-        writer.println();
+        System.out.println("\nPrinting inorder took: " + (System.nanoTime() - startTime) + " nanosecs");
+        //writer.println();
     } // end of printInInorder
 
     private void inorderTraverse(int index, PrintWriter writer) {
@@ -191,7 +192,7 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
             return;
         } else {
             inorderTraverse((index * 2) + 1, writer);
-            writer.print(myTree[index] + " ");
+            writer.write(myTree[index] + " ");
             inorderTraverse((index * 2) + 2, writer);
         }
     }
@@ -201,8 +202,8 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
         // Implement me!
         long startTime = System.nanoTime();
         postorderTraverse(0, writer);
-        System.out.println("Printing postorder took: " + (System.nanoTime() - startTime) + " nanosecs");
-        writer.println();
+        System.out.println("\nPrinting postorder took: " + (System.nanoTime() - startTime) + " nanosecs");
+        //writer.println();
     } // end of printInPostorder
 
     private void postorderTraverse(int index, PrintWriter writer) {
@@ -215,7 +216,7 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
         } else {
             postorderTraverse((index * 2) + 1, writer);
             postorderTraverse((index * 2) + 2, writer);
-            writer.print(myTree[index] + " ");
+            writer.write(myTree[index] + " ");
         }
     }
 

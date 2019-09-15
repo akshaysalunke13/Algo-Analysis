@@ -106,17 +106,14 @@ public class TreeTester {
                     // print all the nodes in the "preorder" traversal
                     case "TP":
                         tree.printInPreorder(writer);
-                        writer.println();
                         break;
                     // print all the nodes in the "inorder" traversal
                     case "TI":
                         tree.printInInorder(writer);
-                        writer.println();
                         break;
                     // print all the nodes in the "postorder" traversal
                     case "TS":
                         tree.printInPostorder(writer);
-                        writer.println();
                         break;
                     // quit
                     case "Q":

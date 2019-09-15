@@ -52,10 +52,14 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
             /**
              * Left child = 2P + 1 Right Child = 2P + 2
              */
+            if (myTree[(2 * index) + 1] == null && myTree[(2 * index) + 2] == null) {
             myTree[(2 * index) + 1] = leftChild;
             myTree[(2 * index) + 2] = rightChild;
-
             System.out.println("Splitting took: " + (System.nanoTime() - startTime) + " nanosecs");
+        } else {
+            System.err.println("Node already has children.");
+        }
+            
         } else {
 
             // srcLabel node not found.
@@ -169,8 +173,10 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
             return;
         } else {
             writer.write(myTree[index] + " ");
+            System.out.print(myTree[index] + " ");
             preorderTraverse((index * 2) + 1, writer);
             preorderTraverse((index * 2) + 2, writer);
+
         }
     }
 
@@ -193,7 +199,9 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
         } else {
             inorderTraverse((index * 2) + 1, writer);
             writer.write(myTree[index] + " ");
+            System.out.print(myTree[index] + " ");
             inorderTraverse((index * 2) + 2, writer);
+
         }
     }
 
@@ -217,6 +225,7 @@ public class SequentialRepresentation<T> implements BSPTree<T> {
             postorderTraverse((index * 2) + 1, writer);
             postorderTraverse((index * 2) + 2, writer);
             writer.write(myTree[index] + " ");
+            System.out.print(myTree[index] + " ");
         }
     }
 
